@@ -40,7 +40,7 @@ def reg_age(message):
 		age = int(message.text)
 	except Exception:
 		bot.send_message(message.from_user.id, 'Введите цифрами')
-		return 	bot.register_next_step_handler(message, reg_age)
+		return bot.register_next_step_handler(message, reg_age)
 	bot.send_message(message.from_user.id, 'Ваш адрес?')
 	bot.register_next_step_handler(message, reg_address)
 
@@ -59,7 +59,7 @@ def reg_complaints(message):
 	key_no = types.InlineKeyboardButton(text='нет', callback_data='no')
 	keyboard.add(key_no)
 	quistion = 'вам ' + str(age) + ' лет? ' \
-			   '\nи Вас зовут: ' + name + '' \
+			   '\nи Вас зовут: ' + name + ' ' \
 '' + surname + '\nваш адрес: ' + address +\
 			   '\nваши жалобы: ' + complaints + '?'
 	bot.send_message(message.from_user.id, text = quistion, reply_markup=keyboard)
@@ -73,5 +73,4 @@ def	callback_worker(call):
 		bot.send_message(call.message.chat.id, 'Как тебя зовут?')
 		bot.register_next_step_handler(call.message, reg_name)
 
-# bot.infinity_polling()
 bot.polling()
